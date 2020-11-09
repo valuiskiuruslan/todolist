@@ -26,12 +26,7 @@ Route::get('/', function () {
 
 Route::get('/user', [UserController::class, 'index']);
 
-Route::post('/upload', function (Illuminate\Http\Request $request) {
-    if ($request->hasFile('image')) {
-        $request->file('image')->store('images', 'public');
-        dd($request->file('image'));
-    }
-});
+Route::post('/upload', [UserController::class, 'uploadAvatar']);
 
 Auth::routes();
 

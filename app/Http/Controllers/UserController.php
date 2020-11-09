@@ -44,14 +44,26 @@ class UserController extends Controller
 //
 //        $user = User::create($data);
 
-        $user = User::where('id', 3)->get();
+        //$user = User::where('id', 3)->get();
 //        dd($user);
 
 //        $user = (new User())->where('id', 3);
 //        dd($user);
 
-        return $user;
+        //return $user;
 
         return view('home');
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $filename = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images', $filename,'public');
+
+            auth()->user()->update(['avatar' => $filename]);
+
+           return redirect()->back();
+        }
     }
 }
