@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -63,4 +64,20 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function uploadAvatar(\Illuminate\Http\UploadedFile $image)
+    {
+        if ($image) {
+            $filename = $image->getClientOriginalName();
+
+            if ($this->avatar) {
+                Storage::disk('public')->delete('/images/' . $this->avatar);
+            }
+
+            $image->storeAs('images', $filename,'public');
+            $this->update(['avatar' => $filename]);
+
+            return redirect()->back();
+        }
+    }
 }

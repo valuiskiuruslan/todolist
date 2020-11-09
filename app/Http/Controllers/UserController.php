@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -58,12 +60,8 @@ class UserController extends Controller
     public function uploadAvatar(Request $request)
     {
         if ($request->hasFile('image')) {
-            $filename = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('images', $filename,'public');
-
-            auth()->user()->update(['avatar' => $filename]);
-
-           return redirect()->back();
+            Auth::user()->uploadAvatar($request->file('image'));
+            return redirect()->back();
         }
     }
 }
