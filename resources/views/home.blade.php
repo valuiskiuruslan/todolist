@@ -18,6 +18,7 @@
                 </div>
 
                 <div class="card-body">
+                    @include('layouts.flash')
                     <form action="/upload" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="image">
