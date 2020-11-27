@@ -37,6 +37,7 @@ class TodoSaveRequest extends FormRequest
     {
         return [
             'title.max' => 'Todo title should not be greater than 255 chars.',
+            'title.required' => 'Todo title should not be empty',
         ];
     }
 }

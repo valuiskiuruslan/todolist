@@ -54,7 +54,12 @@ class UserController extends Controller
 
         //return $user;
 
-        return view('home');
+        if (!empty(Auth::user())) {
+            return view('home');
+        }
+        else {
+            return view('auth.login');
+        }
     }
 
     public function uploadAvatar(Request $request)

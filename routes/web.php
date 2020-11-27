@@ -30,6 +30,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/todos', [TodoController::class, 'index']);
+Route::get('/todos/index', [TodoController::class, 'index']);
 Route::get('/todos/create', [TodoController::class, 'create']);
 Route::post('/todos/save', [TodoController::class, 'save']);
 Route::get('/todos/edit', [TodoController::class, 'edit']);
