@@ -7,6 +7,7 @@
             Create New
         </a>
     </div>
+    <x-alert />
     <ul class="list-group">
         @foreach($todos as $todo)
             <li class="list-group-item">

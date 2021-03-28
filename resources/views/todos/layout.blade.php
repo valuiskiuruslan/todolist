@@ -12,7 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div class="text-center pt-10">
+<div class="text-center container">
     @yield('content')
 </div>
 </body>

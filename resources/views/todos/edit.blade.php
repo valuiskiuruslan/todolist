@@ -1,10 +1,11 @@
 @extends('todos.layout')
 
 @section('content')
-    <h1 class="text-2xl">Edit To-Do</h1>
+    <h1 class="text-2xl">Edit: {{ $todo->title }}</h1>
     <x-alert />
-    <form class="py-5" action="/todos/{{$todo->id}}/store" method="POST">
+    <form class="py-5" action="{{ route('todo.update', $todo->id) }}" method="POST">
         @csrf
+        @method('patch')
         <input type="text" name="title" value="{{$todo->title}}" class="p-2 border rounded">
         <input type="submit" value="Save" class="p-2 border rounded">
     </form>
