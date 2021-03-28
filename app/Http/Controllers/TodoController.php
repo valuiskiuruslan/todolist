@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoStoreRequest;
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,10 @@ class TodoController extends Controller
 
     public function store(TodoStoreRequest $request)
     {
-        Todo::create($request->all());
+        /** @var User $user */
+        $user = auth()->user();
+        $user->todos()->create($request->all());
+//        Todo::create($request->all());
         return redirect()->back()->with('message', 'Todo is created successfully');
     }
 

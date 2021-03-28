@@ -80,4 +80,9 @@ class User extends Authenticatable
             return redirect()->back();
         }
     }
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class);
+    }
 }
