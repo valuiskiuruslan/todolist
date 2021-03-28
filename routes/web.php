@@ -29,8 +29,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/todo', TodoController::class);
+//Route::middleware('auth')->group(function () {
+Route::resource('/todo', TodoController::class)->middleware('auth');
 Route::prefix('/todo')->group(function () {
     Route::put('/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
     Route::put('/{todo}/undone', [TodoController::class, 'undone'])->name('todo.undone');
 });
+//});

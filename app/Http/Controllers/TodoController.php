@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
 //        $todos = Todo::all(); // Maybe it will be better to use every time get() method
