@@ -13,7 +13,9 @@
 </head>
 <body>
 <div class="text-center container">
-    @yield('content')
+    <div class="card">
+        @yield('content')
+    </div>
 </div>
 </body>
 </html>

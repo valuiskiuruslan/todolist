@@ -8,7 +8,7 @@
         </a>
     </div>
     <x-alert />
-    <ul class="list-group">
+    <ul class="list-group list-group-flush">
         @foreach($todos as $todo)
             <li class="list-group-item">
                 <span>{{ $todo->title }}</span>

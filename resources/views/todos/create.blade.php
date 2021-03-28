@@ -3,13 +3,19 @@
 @section('content')
     <h1 class="text-2xl">What next you need To-Do</h1>
     <x-alert />
-    <form class="py-5" action="/todos/save" method="POST">
+    <form action="{{ route('todo.save') }}" method="POST">
         @csrf
-        <input type="text" name="title" class="p-2 border rounded">
-        <input type="submit" value="Create" class="p-2 border rounded">
+        <div class="form-group row justify-content-center">
+            <div class="col-sm-10">
+                <input type="text" name="title" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">
+                Create
+            </button>
+        </div>
     </form>
 
-    <a href="/todos" class="m-5 py-2 px-1 bg-white-400 border cursor-pointer text-black rounded">
+    <a href="{{ route('todo.index') }}" class="btn btn-primary">
         All Todos
     </a>
 @endsection

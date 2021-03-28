@@ -32,6 +32,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/todos', [TodoController::class, 'index'])->name('todo.index');
 Route::get('/todos/index', [TodoController::class, 'index']);
 Route::get('/todos/create', [TodoController::class, 'create']);
-Route::post('/todos/save', [TodoController::class, 'save']);
+Route::post('/todos/save', [TodoController::class, 'save'])->name('todo.save');
 Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
 Route::patch('/todos/{todo}/update', [TodoController::class, 'update'])->name('todo.update');
