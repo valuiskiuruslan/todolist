@@ -3,7 +3,7 @@
 @section('content')
     <div class="text-center mb-2">
         <h1>All your Todos</h1>
-        <a href="/todos/create" class="btn btn-success">
+        <a href="{{ route('todo.create') }}" class="btn btn-success">
             <span class="fas fa-plus-circle"></span>
         </a>
     </div>
@@ -34,7 +34,7 @@
                         <form
                             id="form-delete-{{$todo->id}}"
                             style="display: none"
-                            action="{{route('todo.delete', $todo->id)}}"
+                            action="{{route('todo.destroy', $todo->id)}}"
                             method="post"
                         >
                             @csrf

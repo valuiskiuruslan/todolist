@@ -5,7 +5,7 @@
         <h1>What next you need To-Do</h1>
     </div>
     <x-alert />
-    <form action="{{ route('todo.save') }}" method="POST">
+    <form action="{{ route('todo.store') }}" method="POST">
         @csrf
         <div class="form-group row justify-content-center">
             <div class="col-sm-10">

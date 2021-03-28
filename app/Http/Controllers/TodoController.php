@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TodoSaveRequest;
+use App\Http\Requests\TodoStoreRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -21,21 +21,43 @@ class TodoController extends Controller
         return view('todos.create');
     }
 
-    public function edit(Todo $todo)
-    {
-        return view('todos.edit')->with(['todo' => $todo]);
-    }
-
-    public function save(TodoSaveRequest $request)
+    public function store(TodoStoreRequest $request)
     {
         Todo::create($request->all());
         return redirect()->back()->with('message', 'Todo is created successfully');
     }
 
-    public function update(TodoSaveRequest $request, Todo $todo)
+    /**
+     * Show the form for editing the specified todo.
+     * @param Todo $todo
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function edit(Todo $todo)
+    {
+        return view('todos.edit')->with(['todo' => $todo]);
+    }
+
+    /**
+     * Update the specified todo in storage.
+     * @param TodoStoreRequest $request
+     * @param Todo $todo
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(TodoStoreRequest $request, Todo $todo)
     {
         $todo->update(['title' => $request->title]);
         return redirect(route('todo.index'))->with('message', 'Todo is updated successfully');
+    }
+
+    /**
+     * Remove the specified todo from storage.
+     * @param Todo $todo
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy(Todo $todo)
+    {
+        $todo->delete();
+        return redirect(route('todo.index'))->with('message', 'Todo is deleted');
     }
 
     public function complete(Request $request, Todo $todo)
@@ -48,11 +70,5 @@ class TodoController extends Controller
     {
         $todo->update(['completed' => false]);
         return redirect(route('todo.index'))->with('message', 'Todo is undone again');
-    }
-
-    public function delete(Todo $todo)
-    {
-        $todo->delete();
-        return redirect(route('todo.index'))->with('message', 'Todo is deleted');
     }
 }
