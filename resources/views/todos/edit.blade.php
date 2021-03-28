@@ -1,7 +1,9 @@
 @extends('todos.layout')
 
 @section('content')
-    <h1>Edit: {{ $todo->title }}</h1>
+    <div class="p-2">
+        <h1>Edit: {{ $todo->title }}</h1>
+    </div>
     <x-alert />
     <form action="{{ route('todo.update', $todo->id) }}" method="POST">
         @csrf
