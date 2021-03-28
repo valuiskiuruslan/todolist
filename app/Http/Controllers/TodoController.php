@@ -49,4 +49,10 @@ class TodoController extends Controller
         $todo->update(['completed' => false]);
         return redirect(route('todo.index'))->with('message', 'Todo is undone again');
     }
+
+    public function delete(Todo $todo)
+    {
+        $todo->delete();
+        return redirect(route('todo.index'))->with('message', 'Todo is deleted');
+    }
 }

@@ -3,8 +3,8 @@
 @section('content')
     <div class="text-center mb-2">
         <h1>All your Todos</h1>
-        <a href="/todos/create" class="btn btn-info">
-            Create New
+        <a href="/todos/create" class="btn btn-success">
+            <span class="fas fa-plus-circle"></span>
         </a>
     </div>
     <x-alert/>
@@ -12,7 +12,10 @@
         @foreach($todos as $todo)
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-1 text-center">
+                        @include('todos.complete-button')
+                    </div>
+                    <div class="col-sm-9">
                         <span style="{{$todo->completed ? 'text-decoration: line-through' : ''}}">
                             {{ $todo->title }}
                         </span>
@@ -21,25 +24,22 @@
                         <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-warning" title="Edit">
                             <i class="fas fa-edit"></i>
                         </a>
-                        @if(!$todo->completed)
-                            <span class="btn btn-danger" title="Complete"
-                                onclick="document.getElementById('form-complete-{{$todo->id}}').submit()">
-                                <i class="fas fa-check"></i>
-                            </span>
-                            <form id="form-complete-{{$todo->id}}" style="display: none" action="{{route('todo.complete', $todo->id)}}" method="post">
-                                @csrf
-                                @method('put')
-                            </form>
-                        @else
-                            <span class="btn text-success" title="Undone"
-                                  onclick="document.getElementById('form-undone-{{$todo->id}}').submit()">
-                                <i class="fas fa-check"></i>
-                            </span>
-                            <form id="form-undone-{{$todo->id}}" style="display: none" action="{{route('todo.undone', $todo->id)}}" method="post">
-                                @csrf
-                                @method('put')
-                            </form>
-                        @endif
+                        <span class="btn btn-danger"
+                            onclick="if (confirm('Are you sure you want to delete this todo?')) {
+                                document.getElementById('form-delete-{{$todo->id}}').submit();
+                            }"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <form
+                            id="form-delete-{{$todo->id}}"
+                            style="display: none"
+                            action="{{route('todo.delete', $todo->id)}}"
+                            method="post"
+                        >
+                            @csrf
+                            @method('delete')
+                        </form>
                     </div>
                 </div>
             </li>

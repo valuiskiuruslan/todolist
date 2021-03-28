@@ -37,3 +37,4 @@ Route::get('/todos/{todo}/edit', [TodoController::class, 'edit'])->name('todo.ed
 Route::patch('/todos/{todo}/update', [TodoController::class, 'update'])->name('todo.update');
 Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
 Route::put('/todos/{todo}/undone', [TodoController::class, 'undone'])->name('todo.undone');
+Route::delete('/todos/{todo}/delete', [TodoController::class, 'delete'])->name('todo.delete');

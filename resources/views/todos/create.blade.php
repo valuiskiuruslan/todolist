@@ -1,7 +1,9 @@
 @extends('todos.layout')
 
 @section('content')
-    <h1 class="text-2xl">What next you need To-Do</h1>
+    <div class="text-center mb-2">
+        <h1>What next you need To-Do</h1>
+    </div>
     <x-alert />
     <form action="{{ route('todo.save') }}" method="POST">
         @csrf
