@@ -35,3 +35,5 @@ Route::get('/todos/create', [TodoController::class, 'create']);
 Route::post('/todos/save', [TodoController::class, 'save'])->name('todo.save');
 Route::get('/todos/{todo}/edit', [TodoController::class, 'edit'])->name('todo.edit');
 Route::patch('/todos/{todo}/update', [TodoController::class, 'update'])->name('todo.update');
+Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
+Route::put('/todos/{todo}/undone', [TodoController::class, 'undone'])->name('todo.undone');

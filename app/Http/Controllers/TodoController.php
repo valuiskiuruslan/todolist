@@ -29,12 +29,24 @@ class TodoController extends Controller
     public function save(TodoSaveRequest $request)
     {
         Todo::create($request->all());
-        return redirect()->back()->with('message', 'Todo created successfully');
+        return redirect()->back()->with('message', 'Todo is created successfully');
     }
 
     public function update(TodoSaveRequest $request, Todo $todo)
     {
         $todo->update(['title' => $request->title]);
-        return redirect(route('todo.index'))->with('message', 'Todo updated successfully');
+        return redirect(route('todo.index'))->with('message', 'Todo is updated successfully');
+    }
+
+    public function complete(Request $request, Todo $todo)
+    {
+        $todo->update(['completed' => true]);
+        return redirect(route('todo.index'))->with('message', 'Todo is completed successfully');
+    }
+
+    public function undone(Request $request, Todo $todo)
+    {
+        $todo->update(['completed' => false]);
+        return redirect(route('todo.index'))->with('message', 'Todo is undone again');
     }
 }

@@ -22,13 +22,23 @@
                             <i class="fas fa-edit"></i>
                         </a>
                         @if(!$todo->completed)
-                            <a href="" class="btn btn-danger" title="Complete">
+                            <span class="btn btn-danger" title="Complete"
+                                onclick="document.getElementById('form-complete-{{$todo->id}}').submit()">
                                 <i class="fas fa-check"></i>
-                            </a>
+                            </span>
+                            <form id="form-complete-{{$todo->id}}" style="display: none" action="{{route('todo.complete', $todo->id)}}" method="post">
+                                @csrf
+                                @method('put')
+                            </form>
                         @else
-                            <a href="" class="btn text-success" title="Undone">
+                            <span class="btn text-success" title="Undone"
+                                  onclick="document.getElementById('form-undone-{{$todo->id}}').submit()">
                                 <i class="fas fa-check"></i>
-                            </a>
+                            </span>
+                            <form id="form-undone-{{$todo->id}}" style="display: none" action="{{route('todo.undone', $todo->id)}}" method="post">
+                                @csrf
+                                @method('put')
+                            </form>
                         @endif
                     </div>
                 </div>
