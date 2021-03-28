@@ -18,7 +18,9 @@ class TodoController extends Controller
     public function index()
     {
 //        $todos = Todo::all(); // Maybe it will be better to use every time get() method
-        $todos = Todo::orderBy('completed')->get();
+        /** @var User $user */
+        $user = auth()->user();
+        $todos = $user->todos()->orderBy('completed')->get();
         return view('todos.index')->with(['todos' => $todos]);
     }
 
